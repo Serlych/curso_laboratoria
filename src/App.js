@@ -1,12 +1,7 @@
-import React from "react";
-
+import React from 'react';
+import { addOneDog } from './redux/actions';
 import { connect } from "react-redux";
 
-import { BrowserRouter } from "react-router-dom";
-
-import { actionChangeTitle } from "./redux/actions/DogActions";
-
-import AppRoutes from "./AppRoutes";
 
 class App extends React.Component {
   constructor(props) {
@@ -15,31 +10,39 @@ class App extends React.Component {
   }
 
   render() {
-    const { cambiarTitulo } = this.props;
+    const { addDog } = this.props;
+    let newDog;
 
-    cambiarTitulo("Gloria");
+    function handleInput(e) {
+      return newDog = e.currentTarget.value;
+    }
 
     return (
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <div className="main">
+        <h1>Agrega un Lomito:</h1>
+        <div className="input-container">
+          <input type="text" placeholder="Fido" onChange={handleInput} />
+          <button onClick={() => addDog(newDog)}>+</button>
+        </div>
+        <div className="display-container">{this.props.perritos}</div>
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    perritos: state.DogReducer.dogs
+    perritos: state.dogReducer.dogs
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    cambiarTitulo: title => dispatch(actionChangeTitle(title))
+    addDog: name => dispatch(addOneDog(name))
   };
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+  )(App);

@@ -1,23 +1,16 @@
 const INITIAL_STATE = {
-  title: "Lomitos recargados",
-  dogs: [
-    {
-      name: "Fuhrerlais",
-      religion: "Agnostic"
-    }
-  ]
+	dogs: []
 };
 
-function DogReducer(prevState = INITIAL_STATE, action) {
-  switch (action.type) {
-    case "CHANGE_TITLE":
-      return {
-        ...prevState,
-        title: action.payload
-      };
-    default:
-      return prevState;
-  }
+const dogReducer = (prevState = INITIAL_STATE, action) => {
+	switch(action.type) {
+		case 'ADD_DOG':
+			return {
+				dogs: [...prevState.dogs,action.payload]
+			}
+		default:
+			return prevState;
+	}
 }
 
-export default DogReducer;
+export default dogReducer;

@@ -1,7 +1,6 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
+import dogReducer from './reducers/dogReducer';
 
-import DogReducer from "./reducers/DogReducer";
-
-export default combineReducers({
-  DogReducer
+ export default combineReducers({
+	dogReducer
 });
